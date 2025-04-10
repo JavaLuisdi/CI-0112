@@ -8,6 +8,7 @@ public class Robot {
     private float health;
     private float attack;
     private float defense;
+    private boolean alive = true;
 
     public void setName(String name) {
         this.name = name;
@@ -35,21 +36,11 @@ public class Robot {
         return defense;
     }
 
-    private static Robot[] robot;
+    public void attack(float attackPower) {
+        this.health -= attackPower;
+    }
 
-    public static void makeRobotArray(int robotQuantity) {
-        robot = new Robot[robotQuantity];
-        for (int j = 0 ; j < robot.length ; j++) {
-            robot[j] = new Robot();
-        }
-    }
-    
-    public static int getRobotLength() {
-        return robot.length;
-    }
-    public static Robot getRobot(int robotIndex) {
-        return robot[robotIndex];
-    }
+
 
 
     
