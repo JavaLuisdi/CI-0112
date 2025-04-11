@@ -97,13 +97,15 @@ public class JuegoBatalla {
                                 robot[c].setAlive(false);
                                 robot[c].setHealth(0);
                             }
-                        }    
-                        if (robot[attacker].getAlive()) { // Cuenta cuántos robots quedan con vida
-                            aliveCheck += 1;
                         }
-                    }
-                    aliveAmount = aliveCheck; // Establece cuántos robots quedan con vida al final de cada ronda
-                    aliveCheck = 0; // Reinica el conteo para la siguiente ronda
+                        for (int k = 0 ; k < robot.length ; k++) { // Cuenta cuántos robots quedan con vida al final de cada ataque
+                            if (robot[k].getAlive()) { 
+                                aliveCheck += 1;
+                            }
+                        }
+                        aliveAmount = aliveCheck; // Establece cuántos robots quedan con vida al final de cada ataque
+                        aliveCheck = 0; // Reinica el conteo
+                    }               
                     rounds += 1; // Cuenta las rondas jugadas
                     System.out.print("\n");
                     break;
