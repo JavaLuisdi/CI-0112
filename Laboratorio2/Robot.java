@@ -1,7 +1,4 @@
-import java.util.Scanner;
-
 public class Robot {
-    Scanner scanner = new Scanner(System.in);
 
     private String name;
     private float health;
@@ -43,13 +40,5 @@ public class Robot {
 
     public void attack(float attackPower) {
         this.health -= attackPower;
-    }
-
-
-
-
-    
-        
-        
-    
+    } 
 }
