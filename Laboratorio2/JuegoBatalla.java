@@ -67,7 +67,7 @@ public class JuegoBatalla {
         while (aliveAmount > 1) {
             System.out.println("Escoja la acción que desea realizar:");
             System.out.println("1. Comenzar ronda");
-            System.out.println("2. Pausar juego y mostrar estado de los robots");
+            System.out.println("2. Mostrar estado de los robots");
             menuIndex = scanner.nextInt();
             System.out.print("\n");
             switch (menuIndex) {
@@ -114,6 +114,8 @@ public class JuegoBatalla {
                     }
                     break;
                 default:
+                    System.out.println("Número ingresado no es válido.");
+                    System.out.print("\n");
             }
         }
         for (int winner = 0 ; winner < robot.length ; winner++) {
