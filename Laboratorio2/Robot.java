@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.Scanner;
 
 public class Robot {
@@ -22,6 +21,9 @@ public class Robot {
     public void setDefense(float defense) {
         this.defense = defense;
     }
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
 
     public String getName() {
         return name;
@@ -34,6 +36,9 @@ public class Robot {
     }
     public float getDefense() {
         return defense;
+    }
+    public boolean getAlive() {
+        return alive;
     }
 
     public void attack(float attackPower) {

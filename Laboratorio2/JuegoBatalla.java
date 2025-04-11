@@ -14,6 +14,7 @@ public class JuegoBatalla {
         while (robotAmount < 2 || robotAmount > 10) {
             System.out.print("Digite la cantidad de robots que participarán (2-10): ");
             robotAmount = scanner.nextInt();
+            System.out.print("\n");
             if (robotAmount < 2 || robotAmount > 10) {
                 System.out.println("Número ingresado no es válido.");
                 continue;
@@ -44,42 +45,83 @@ public class JuegoBatalla {
                 j -= 1;
                 continue;
             }
+            robot[j].setAttack(attack);
             System.out.print("Digite la cantidad de puntos de defensa de " + robot[j].getName() + " (0-10): ");
             defense = scanner.nextFloat();
             if (defense < 0 || defense > 10) {
                 System.out.println("Número ingresado no es válido.");
+                System.out.print("\n");
                 continue;
             }
+            robot[j].setDefense(defense);
+            System.out.print("\n");
         }
 
         int aliveAmount = robotAmount;
+        int aliveCheck = 0;
         int menuIndex;
         int victim;
         float attackPower;
+        int rounds = 0;
 
         while (aliveAmount > 1) {
             System.out.println("Escoja la acción que desea realizar:");
             System.out.println("1. Comenzar ronda");
             System.out.println("2. Pausar juego y mostrar estado de los robots");
             menuIndex = scanner.nextInt();
+            System.out.print("\n");
             switch (menuIndex) {
                 case 1:
                     for (int attacker = 0 ; attacker < robot.length ; attacker++) {
-                        victim = random.nextInt(robot.length);
-                        if (attacker == victim) {
-                            attacker -= 1;
-                            continue;
+                        if (robot[attacker].getAlive()) {
+                            victim = random.nextInt(robot.length);
+                            if (!robot[victim].getAlive()) {
+                                attacker -= 1;
+                                continue;
+                            }
+                            if (attacker == victim) {
+                                attacker -= 1;
+                                continue;
+                            }
+                            attackPower = robot[attacker].getAttack() - (robot[victim].getDefense() * 0.75f);
+                            robot[victim].attack(attackPower);
+                            System.out.println(robot[attacker].getName() + " inflingió " + attackPower + " de daño a " + robot[victim].getName() + ".");
+                        } else {
+                            System.out.println(robot[attacker].getName() + " está fuera de juego.");
                         }
-                        attackPower = robot[attacker].getAttack() - ((robot[victim].getDefense() * 3) / 4);
-                        robot[victim].attack(attackPower);
-                        System.out.println(robot[attacker].getName() + " inflingió " + attackPower + " de daño a " + robot[victim].getName() + ".");
+                        for (int c = 0 ; c < robot.length ; c++) {
+                            if (robot[c].getHealth() <= 0) {
+                                robot[c].setAlive(false);
+                                robot[c].setHealth(0);
+                            }
+                        }    
+                        if (robot[attacker].getAlive()) {
+                            aliveCheck += 1;
+                        }
                     }
+                    aliveAmount = aliveCheck;
+                    aliveCheck = 0;
+                    rounds += 1;
+                    System.out.print("\n");
                     break;
                 case 2:
-                    
+                    for (int t = 0 ; t < robot.length ; t++) {
+                        System.out.println("Estado de " + robot[t].getName() + ":");
+                        System.out.println("Puntos de vida restantes: " + robot[t].getHealth());
+                        System.out.println("Puntos de ataque: " + robot[t].getAttack());
+                        System.out.println("Puntos de defensa: " + robot[t].getDefense());
+                        System.out.println("-----------------------------------------");
+                    }
                     break;
                 default:
             }
         }
+        for (int winner = 0 ; winner < robot.length ; winner++) {
+            if (robot[winner].getAlive()) {
+                System.out.println("El robot ganador es " + robot[winner].getName() + ".");
+                System.out.println("Rondas jugadas: " + rounds);
+            }
+        }
+        scanner.close();
     }   
 }
