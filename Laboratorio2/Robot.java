@@ -6,6 +6,7 @@ public class Robot {
     private float defense;
     private boolean alive = true;
 
+    // Métodos "set" para dar atributos a los robots
     public void setName(String name) {
         this.name = name;
     }
@@ -22,6 +23,7 @@ public class Robot {
         this.alive = alive;
     }
 
+    // Métodos "get" para obtener atributos de los robots
     public String getName() {
         return name;
     }
@@ -38,7 +40,7 @@ public class Robot {
         return alive;
     }
 
-    public void attack(float attackPower) {
+    public void attack(float attackPower) { // Disminuye la vida del robot al ser atacado
         this.health -= attackPower;
     } 
 }
