@@ -1,14 +1,21 @@
 public class Tablero {
     
     char[][] board;
-    Barco[] ship = new Barco[3]; 
+    Barco[] ship; 
 
     public void makeBoard() {
         this.board = new char[5][5];
         for (int i = 0 ; i < this.board.length ; i++) {
-            for (int j = 0 ; i < this.board[i].length ; j++) {
+            for (int j = 0 ; j < this.board[i].length ; j++) {
                 this.board[i][j] = '~';
             }
+        }
+    }
+
+    public void makeShipArray() {
+        this.ship = new Barco[3];
+        for (int i = 0 ; i < this.ship.length ; i++) {
+            this.ship[i] = new Barco();
         }
     }
 
@@ -16,7 +23,7 @@ public class Tablero {
         this.ship[shipIndex].setRow(row);
         this.ship[shipIndex].setColumn(column);
         this.ship[shipIndex].setSinked(false);
-        this.board[row][column] = 'B';
+        this.board[row-1][column-1] = 'B';
     }
 
     public void markBoxAttacked(int row , int column) {
@@ -41,16 +48,16 @@ public class Tablero {
     }
   
     Barco[] shipTemp = new Barco[3];
-    public void showBoard(boolean attackerTurn) {  
-        if (attackerTurn) {
+    public void showBoard(boolean showBoats) {  
+        if (showBoats) {
             System.out.print("  ");
-            for (int i = 1 ; i <= this.board.length ; i++) {
-                System.out.print(i + " ");
+            for (int i = 0 ; i < this.board.length ; i++) {
+                System.out.print((i + 1) + " ");
             }
-            for (int i = 1 ; i <= this.board.length - 1 ; i++) {
+            for (int i = 0 ; i < this.board.length ; i++) {
                 System.out.println();
-                System.out.print(i);
-                for (int j = 1 ; j <= this.board.length ; j++) {
+                System.out.print(i+1);
+                for (int j = 0 ; j < this.board.length ; j++) {
                     System.out.print(" " + this.board[i][j]);
                 }
             }
@@ -73,7 +80,7 @@ public class Tablero {
                 }
             }
         }
-        
+        System.out.println();
     }
 
     public boolean everyShipSinked() {
