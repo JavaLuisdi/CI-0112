@@ -2,12 +2,11 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 public class Main {
     public static void main(String[] args) {
-
+        Scanner scanner = new Scanner(System.in);
         BatallaNaval batallaNaval = new BatallaNaval();
 
         int menuIndex = 0;
         while (menuIndex != 3) {
-            Scanner scanner = new Scanner(System.in);
             System.out.println("~ ~ ~ Menú de videojuegos ~ ~ ~");
             System.out.println("1. Batalla naval");
             System.out.println("2. Ahorcado");
@@ -32,5 +31,6 @@ public class Main {
                 System.out.println();
             }
         }
+        scanner.close();
     }
 }

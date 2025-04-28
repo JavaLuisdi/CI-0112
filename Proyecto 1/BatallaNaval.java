@@ -23,7 +23,15 @@ public class BatallaNaval {
         if(currentPlayer == player[0]) {
             currentPlayer = player[1];
         } else {
-            currentPlayer = player[1];
+            currentPlayer = player[0];
+        }
+    }
+
+    public Jugador getCurrentPlayer(boolean player1Turn) {
+        if (player1Turn) {
+            return player[0];
+        } else {
+            return player[1];
         }
     }
 
@@ -77,8 +85,14 @@ public class BatallaNaval {
             changeCurrentPlayer();
         }
 
+        boolean player1Turn;
         while (!player[0].tablero.everyShipSinked() && !player[1].tablero.everyShipSinked()) {
             for (int playerTurn = 0 ; playerTurn < player.length ; playerTurn++) {
+                if (playerTurn == 0) {
+                    player1Turn = true;
+                } else {
+                    player1Turn = false;
+                }
                 System.out.println("Turno del jugador " + (playerTurn + 1) + ":");
                 System.out.println();
                 if (playerTurn == 0) {
@@ -95,7 +109,7 @@ public class BatallaNaval {
                     player[0].tablero.showBoard(false);
                 }
                 try {
-                    System.out.print("Digite la fila del barco que desea atacar: ");
+                    System.out.print("Digite la fila de la casilla que desea atacar: ");
                     row = scanner.nextInt();
                     if (row < 1 || row > 5) {
                         playerTurn -= 1;
@@ -107,23 +121,35 @@ public class BatallaNaval {
                     System.out.print("Digite la columna de la casilla que desea atacar: ");
                     column = scanner.nextInt();
                     if (column < 1 || column > 5) {
-                        i -= 1;
+                        playerTurn -= 1;
                         System.out.println();
                         System.out.println("Digite un número válido.");
                         System.out.println();
                         continue;
                     }
-                    if (currentPlayer.tablero.board[row-1][column-1] != 'B') {
-                        currentPlayer.tablero.placeBoat(i-1 , row , column);
+                    if (getCurrentPlayer(!player1Turn).tablero.board[row-1][column-1] != 'O' && getCurrentPlayer(!player1Turn).tablero.board[row - 1][column - 1] != 'X') {
+                        getCurrentPlayer(!player1Turn).tablero.markBoxAttacked(row  , column );
+                        if (getCurrentPlayer(!player1Turn).tablero.board[row - 1][column - 1] == 'X') {
+                            getCurrentPlayer(!player1Turn).tablero.getBarco(row, column).setSinked(true);
+                            System.out.println("¡Le ha disparado a un barco enemigo!");
+                            playerTurn -= 1;
+                            if (getCurrentPlayer(!player1Turn).tablero.everyShipSinked()) {
+                                System.out.println("¡Jugador " + (playerTurn + 2) + " ha hundido todos los barcos enemigos! ¡Gana el juego!");
+                                return; // Termina el juego inmediatamente
+                            }
+                        } else {
+                            System.out.println("Disparo fallido.");
+                        }
                     } else {
-                        i -= 1;
+                        playerTurn -= 1;
                         System.out.println();
-                        System.out.println("Esta casilla ya posee un barco.");
+                        System.out.println("Esta casilla ya ha sido atacada.");
                         System.out.println();
+                        continue;
                     }             
                 } catch (InputMismatchException e) {
                     scanner.nextLine();
-                    i -= 1;
+                    playerTurn -= 1;
                     System.out.println();
                     System.out.println("Digite un número válido.");
                     System.out.println();
@@ -131,7 +157,7 @@ public class BatallaNaval {
                 }
             }
         }
-        
+        scanner.close();
     }
 }
 

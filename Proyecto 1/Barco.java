@@ -29,4 +29,5 @@ public class Barco {
     public boolean getAttacked() {
         return attacked;
     }
+
 }
