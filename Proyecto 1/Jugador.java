@@ -10,7 +10,7 @@ public class Jugador {
         this.tablero.markBoxAttacked(row, column);
     }
 
-    public boolean attackerHitShip() {
-        
+    public boolean victimShipGotHit() {
+
     }
 }
