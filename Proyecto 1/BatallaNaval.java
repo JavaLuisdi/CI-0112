@@ -158,6 +158,7 @@ public class BatallaNaval {
             }
         }
         scanner.close();
+        
     }
 }
 
