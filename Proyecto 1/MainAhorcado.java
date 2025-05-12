@@ -9,7 +9,7 @@ public class MainAhorcado {
 
         // Bucle principal del juego
         while (!juego.isJuegoTerminado()) {
-            System.out.println("\nPalabra: " + juego.getProgreso());
+            System.out.println("Palabra: " + juego.getProgreso());
             System.out.println("Intentos restantes: " + juego.getIntentosRestantes());
 
             char letra = jugador.adivinarLetra();
@@ -22,9 +22,9 @@ public class MainAhorcado {
 
         // Resultado final
         if (juego.getProgreso().equals(juego.getPalabraSecreta())) {
-            System.out.println("\n¡Felicidades! Adivinaste la palabra: " + juego.getPalabraSecreta());
+            System.out.println("¡Felicidades! Adivinaste la palabra: " + juego.getPalabraSecreta());
         } else {
-            System.out.println("\n¡Perdiste! La palabra era: " + juego.getPalabraSecreta());
+            System.out.println("¡Perdiste! La palabra era: " + juego.getPalabraSecreta());
         }
 
         jugador.cerrarScanner();
