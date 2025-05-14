@@ -43,8 +43,6 @@ public class JuegoAhorcado {
     public String getProgreso() {
         return String.valueOf(palabraAdivinada);
     }
-
-    // Getters para acceder a los atributos
     public int getIntentosRestantes() {
         return intentosRestantes;
     }

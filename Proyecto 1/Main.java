@@ -1,5 +1,5 @@
-import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -19,10 +19,10 @@ public class Main {
                         batallaNaval.startBattleship();
                     break;
                     case 2:
-                    break;
-                    case 3:
+                    MainAhorcado.main(args);
                     break;
                     default:
+                    System.out.println("Digite un número válido.");
                 }
             } catch (InputMismatchException e) {
                 scanner.nextLine();
