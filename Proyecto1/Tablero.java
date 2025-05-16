@@ -1,9 +1,32 @@
+/**
+ * @class Tablero
+ * @brief Representa un tablero de juego para batalla naval.
+ * 
+ * La clase gestiona una matriz de caracteres que representa el tablero
+ * y un arreglo de barcos colocados en él.
+ */
 public class Tablero {
-    //Matriz como tablero y arreglo de barcos del tablero
+    /**
+     * @brief Matriz que representa el tablero de juego.
+     * 
+     * Cada celda puede contener:
+     * - '~' para agua
+     * - 'B' para barco
+     * - 'X' para barco hundido
+     * - 'O' para ataque fallido
+     */
     char[][] board;
+    
+    /**
+     * @brief Arreglo de barcos colocados en el tablero.
+     */
     Barco[] ship; 
 
-    //Inicializa y asigna "~" a cada casilla predeterminadamente
+    /**
+     * @brief Inicializa el tablero con agua en todas las celdas.
+     * 
+     * Crea una matriz 5x5 y asigna el carácter '~' a cada celda.
+     */
     public void makeBoard() {
         this.board = new char[5][5];
         for (int i = 0 ; i < this.board.length ; i++) {
@@ -13,7 +36,11 @@ public class Tablero {
         }
     }
 
-    //Inicializa cada barco del arreglo
+    /**
+     * @brief Inicializa el arreglo de barcos.
+     * 
+     * Crea 3 instancias de la clase Barco.
+     */
     public void makeShipArray() {
         this.ship = new Barco[3];
         for (int i = 0 ; i < this.ship.length ; i++) {
@@ -21,7 +48,13 @@ public class Tablero {
         }
     }
 
-    //Coloca un barco en una casilla del tablero. Asigna "B" a la casilla indicando que hay un barco
+    /**
+     * @brief Coloca un barco en una posición específica del tablero.
+     * 
+     * @param shipIndex Índice del barco en el arreglo
+     * @param row Fila donde colocar el barco (1-5)
+     * @param column Columna donde colocar el barco (1-5)
+     */
     public void placeBoat(int shipIndex , int row , int column) {
         this.ship[shipIndex].setRow(row);
         this.ship[shipIndex].setColumn(column);
@@ -29,7 +62,15 @@ public class Tablero {
         this.board[row-1][column-1] = 'B';
     }
 
-    //Al atacar una casilla, le asigna "X" si esta posee un barco y marca el barco como hundido, u "O" si no posee un barco, informando al usuario cuál caso se da. Si la casilla ya ha sido atacada, se le indica al usuario
+    /**
+     * @brief Marca una casilla como atacada.
+     * 
+     * Si hay un barco, lo marca como hundido ('X'), si no, marca como fallo ('O').
+     * Informa al usuario el resultado del ataque.
+     * 
+     * @param row Fila a atacar (1-5)
+     * @param column Columna a atacar (1-5)
+     */
     public void markBoxAttacked(int row , int column) {
         if (this.board[row - 1][column - 1] != 'X' || this.board[row - 1][column - 1] != 'O') {
             for (int i = 0 ; i < this.ship.length ; i++) {
@@ -51,7 +92,11 @@ public class Tablero {
         }      
     }
   
-    //Muestra el estado actual de un tablero al usuario. Puede mostrar los barcos colocados o puede no mostrarlos.
+    /**
+     * @brief Muestra el estado actual del tablero.
+     * 
+     * @param showBoats Si es true, muestra los barcos ('B'), si es false los oculta ('~')
+     */
     Barco[] shipTemp = new Barco[3];
     public void showBoard(boolean showBoats) {  
         if (showBoats) {
@@ -86,7 +131,11 @@ public class Tablero {
         System.out.println();
     }
 
-    //Revisa si todos los barcos de un tablero han sido hundidos
+    /**
+     * @brief Verifica si todos los barcos han sido hundidos.
+     * 
+     * @return true si todos los barcos están hundidos, false si al menos uno sigue a flote
+     */
     public boolean everyShipSinked() {
         for (int i = 0; i < this.ship.length; i++) {
             if (!this.ship[i].getSinked()) {
@@ -96,7 +145,13 @@ public class Tablero {
         return true;
     }
 
-    //Devuelve el barco de una casilla específica
+    /**
+     * @brief Obtiene el barco en una posición específica.
+     * 
+     * @param row Fila a buscar (1-5)
+     * @param column Columna a buscar (1-5)
+     * @return El objeto Barco en esa posición, o null si no hay barco
+     */
     public Barco getBarco(int row , int column) {
         for (int i = 0 ; i < this.ship.length ; i++) {
             if (this.ship[i].getRow() == row && this.ship[i].getColumn() == column) {

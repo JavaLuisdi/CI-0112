@@ -1,14 +1,37 @@
-import java.util.Scanner;
+/**
+ * @class BatallaNaval
+ * @brief Clase principal que implementa la lógica del juego de Batalla Naval.
+ * 
+ * Controla el flujo del juego, turnos de jugadores y las interacciones entre ellos.
+ */
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class BatallaNaval {
-    //Arreglo de dos jugadores y el jugador del turno
+    /**
+     * @brief Arreglo de jugadores (siempre 2 jugadores)
+     */
     Jugador[] player;
+    
+    /**
+     * @brief Jugador que tiene el turno actual
+     */
     Jugador currentPlayer;
 
+    /**
+     * @brief Scanner para entrada de usuario
+     */
     Scanner scanner = new Scanner(System.in);
 
-    //Inicializa los elementos del juego
+    /**
+     * @brief Inicializa los componentes del juego
+     * 
+     * Crea:
+     * - 2 jugadores
+     * - Tableros para cada jugador
+     * - Arreglos de barcos
+     * Establece al jugador 1 como currentPlayer inicial
+     */
     public void initializeGame() {
         player = new Jugador[2];
         for (int i = 0 ; i < player.length ; i++) {
@@ -20,7 +43,9 @@ public class BatallaNaval {
         currentPlayer = player[0];
     }
 
-    //Cambia el jugador actual
+    /**
+     * @brief Alterna el turno entre jugadores
+     */
     public void changeCurrentPlayer() {
         if(currentPlayer == player[0]) {
             currentPlayer = player[1];
@@ -29,7 +54,11 @@ public class BatallaNaval {
         }
     }
 
-    //Devuelve qué jugador tiene el turno
+    /**
+     * @brief Obtiene el jugador actual basado en el turno
+     * @param player1Turn true si es turno del jugador 1
+     * @return Referencia al jugador correspondiente
+     */
     public Jugador getCurrentPlayer(boolean player1Turn) {
         if (player1Turn) {
             return player[0];
@@ -38,11 +67,21 @@ public class BatallaNaval {
         }
     }
 
-    //Contiene la lógica del juego. Inicia el juego
+    /**
+     * @brief Coordina toda la lógica principal del juego
+     * 
+     * Maneja:
+     * - Fase de colocación de barcos
+     * - Fase de ataques
+     * - Cambio de turnos
+     * - Verificación de victoria
+     * 
+     * @note El juego termina cuando un jugador hunde todos los barcos del oponente
+     */
     int row;
     int column;
     public void startBattleship() {
-        
+        // Fase de colocación de barcos
         for (int playerIndex = 0 ; playerIndex < 2 ; playerIndex++) {
             System.out.println("Jugador " + (playerIndex + 1) + " coloca sus barcos:");
             System.out.println();
@@ -89,6 +128,7 @@ public class BatallaNaval {
             changeCurrentPlayer();
         }
 
+        // Fase de ataques
         boolean player1Turn;
         while (!player[0].tablero.everyShipSinked() && !player[1].tablero.everyShipSinked()) {
             for (int playerTurn = 0 ; playerTurn < player.length ; playerTurn++) {
@@ -131,14 +171,16 @@ public class BatallaNaval {
                         System.out.println();
                         continue;
                     }
-                    if (getCurrentPlayer(!player1Turn).tablero.board[row-1][column-1] != 'O' && getCurrentPlayer(!player1Turn).tablero.board[row - 1][column - 1] != 'X') {
-                        getCurrentPlayer(!player1Turn).tablero.markBoxAttacked(row  , column );
+                    if (getCurrentPlayer(!player1Turn).tablero.board[row-1][column-1] != 'O' && 
+                        getCurrentPlayer(!player1Turn).tablero.board[row - 1][column - 1] != 'X') {
+                        getCurrentPlayer(!player1Turn).tablero.markBoxAttacked(row, column);
                         if (getCurrentPlayer(!player1Turn).tablero.board[row - 1][column - 1] == 'X') {
                             getCurrentPlayer(!player1Turn).tablero.getBarco(row, column).setSinked(true);
                             System.out.println("¡Le ha disparado a un barco enemigo!");
                             playerTurn -= 1;
                             if (getCurrentPlayer(!player1Turn).tablero.everyShipSinked()) {
-                                System.out.println("¡Jugador " + (playerTurn + 2) + " ha hundido todos los barcos enemigos! ¡Gana el juego!");
+                                System.out.println("¡Jugador " + (playerTurn + 2) + 
+                                    " ha hundido todos los barcos enemigos! ¡Gana el juego!");
                                 return; 
                             }
                         } else {
