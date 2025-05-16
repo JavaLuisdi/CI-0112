@@ -1,8 +1,9 @@
 public class Tablero {
-    
+    //Matriz como tablero y arreglo de barcos del tablero
     char[][] board;
     Barco[] ship; 
 
+    //Inicializa y asigna "~" a cada casilla predeterminadamente
     public void makeBoard() {
         this.board = new char[5][5];
         for (int i = 0 ; i < this.board.length ; i++) {
@@ -12,6 +13,7 @@ public class Tablero {
         }
     }
 
+    //Inicializa cada barco del arreglo
     public void makeShipArray() {
         this.ship = new Barco[3];
         for (int i = 0 ; i < this.ship.length ; i++) {
@@ -19,6 +21,7 @@ public class Tablero {
         }
     }
 
+    //Coloca un barco en una casilla del tablero. Asigna "B" a la casilla indicando que hay un barco
     public void placeBoat(int shipIndex , int row , int column) {
         this.ship[shipIndex].setRow(row);
         this.ship[shipIndex].setColumn(column);
@@ -26,6 +29,7 @@ public class Tablero {
         this.board[row-1][column-1] = 'B';
     }
 
+    //Al atacar una casilla, le asigna "X" si esta posee un barco y marca el barco como hundido, u "O" si no posee un barco, informando al usuario cuál caso se da. Si la casilla ya ha sido atacada, se le indica al usuario
     public void markBoxAttacked(int row , int column) {
         if (this.board[row - 1][column - 1] != 'X' || this.board[row - 1][column - 1] != 'O') {
             for (int i = 0 ; i < this.ship.length ; i++) {
@@ -47,6 +51,7 @@ public class Tablero {
         }      
     }
   
+    //Muestra el estado actual de un tablero al usuario. Puede mostrar los barcos colocados o puede no mostrarlos.
     Barco[] shipTemp = new Barco[3];
     public void showBoard(boolean showBoats) {  
         if (showBoats) {
@@ -81,21 +86,23 @@ public class Tablero {
         System.out.println();
     }
 
+    //Revisa si todos los barcos de un tablero han sido hundidos
     public boolean everyShipSinked() {
         for (int i = 0; i < this.ship.length; i++) {
-            if (!this.ship[i].getSinked()) { // Si algún barco no está hundido
+            if (!this.ship[i].getSinked()) {
                 return false;
             }
         }
-        return true; // Todos los barcos están hundidos
+        return true;
     }
 
+    //Devuelve el barco de una casilla específica
     public Barco getBarco(int row , int column) {
         for (int i = 0 ; i < this.ship.length ; i++) {
             if (this.ship[i].getRow() == row && this.ship[i].getColumn() == column) {
                 return this.ship[i];
             }
         }
-        return null; // Return null if no matching ship is found
+        return null;
     }
 }

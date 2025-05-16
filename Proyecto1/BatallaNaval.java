@@ -2,12 +2,13 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class BatallaNaval {
-    
+    //Arreglo de dos jugadores y el jugador del turno
     Jugador[] player;
     Jugador currentPlayer;
 
     Scanner scanner = new Scanner(System.in);
 
+    //Inicializa los elementos del juego
     public void initializeGame() {
         player = new Jugador[2];
         for (int i = 0 ; i < player.length ; i++) {
@@ -19,6 +20,7 @@ public class BatallaNaval {
         currentPlayer = player[0];
     }
 
+    //Cambia el jugador actual
     public void changeCurrentPlayer() {
         if(currentPlayer == player[0]) {
             currentPlayer = player[1];
@@ -27,6 +29,7 @@ public class BatallaNaval {
         }
     }
 
+    //Devuelve qué jugador tiene el turno
     public Jugador getCurrentPlayer(boolean player1Turn) {
         if (player1Turn) {
             return player[0];
@@ -35,6 +38,7 @@ public class BatallaNaval {
         }
     }
 
+    //Contiene la lógica del juego. Inicia el juego
     int row;
     int column;
     public void startBattleship() {
@@ -135,7 +139,7 @@ public class BatallaNaval {
                             playerTurn -= 1;
                             if (getCurrentPlayer(!player1Turn).tablero.everyShipSinked()) {
                                 System.out.println("¡Jugador " + (playerTurn + 2) + " ha hundido todos los barcos enemigos! ¡Gana el juego!");
-                                return; // Termina el juego inmediatamente
+                                return; 
                             }
                         } else {
                             System.out.println("Disparo fallido.");
@@ -158,7 +162,5 @@ public class BatallaNaval {
             }
         }
         scanner.close();
-        
     }
 }
-

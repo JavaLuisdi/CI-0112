@@ -2,7 +2,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         BatallaNaval batallaNaval = new BatallaNaval();
 
         //Menu. Inicia el videojuego que el usuario elija
@@ -13,7 +13,7 @@ public class Main {
             System.out.println("2. Ahorcado");
             System.out.println("3. Salir");
             try {
-                menuIndex = scan.nextInt();
+                menuIndex = scanner.nextInt();
                 switch (menuIndex) {
                     case 1:
                         batallaNaval.initializeGame();
@@ -26,12 +26,12 @@ public class Main {
                     System.out.println("Digite un número válido.");
                 }
             } catch (InputMismatchException e) {
-                scan.nextLine();
+                scanner.nextLine();
                 System.out.println();
                 System.out.println("Digite un número válido.");
                 System.out.println();
             }
         }
-        scan.close();
+        scanner.close();
     }
 }

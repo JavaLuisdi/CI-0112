@@ -10,11 +10,13 @@ public class JugadorAhorcado{
 
 // Metodo para que el jugador ingrese la palabra secreta
 public String ingresarPalabraSecreta() {
+    Scanner scanner = new Scanner(System.in);
     String palabra;
     do {
         System.out.print("Jugador 1, ingrese palabra secreta (solo letras): ");
         palabra = scanner.nextLine().toUpperCase();
     } while (!palabra.matches("[A-ZÑ]+"));  //solo permite letras
+    
     return palabra;
 }
 

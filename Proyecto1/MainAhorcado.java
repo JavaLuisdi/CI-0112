@@ -27,6 +27,6 @@ public class MainAhorcado {
             System.out.println("¡Perdiste! La palabra era: " + juego.getPalabraSecreta());
         }
 
-        
+        jugador.cerrarScanner();
     } 
 } 
