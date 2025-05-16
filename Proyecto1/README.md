@@ -6,26 +6,23 @@ Bienvenido al Proyecto 1 del curso CI-0112. Este proyecto incluye dos juegos cl�
 🔤 Ahorcado
 
 📥 Instalación y Ejecución
-Clonar el repositorio:
 
+Clonar el repositorio:
 Copiar
 Editar
 git clone https://github.com/JavaLuisdi/CI-0112.git
+
 Navegar al directorio del proyecto:
-
-
 Copiar
 Editar
 cd CI-0112/Proyecto1
+
 Compilar los archivos Java:
-
-
 Copiar
 Editar
 javac *.java
+
 Ejecutar el programa:
-
-
 Copiar
 Editar
 java Main
