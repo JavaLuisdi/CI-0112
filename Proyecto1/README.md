@@ -6,6 +6,7 @@ Bienvenido al Proyecto 1 del curso CI-0112. Este proyecto incluye dos juegos cl�
 🔤 Ahorcado
 
 📥 Instalación y Ejecución
+<<<<<<< HEAD
 Clonar el repositorio:
 
 Copiar
@@ -26,6 +27,25 @@ javac *.java
 Ejecutar el programa:
 
 
+=======
+
+Clonar el repositorio:
+Copiar
+Editar
+git clone https://github.com/JavaLuisdi/CI-0112.git
+
+Navegar al directorio del proyecto:
+Copiar
+Editar
+cd CI-0112/Proyecto1
+
+Compilar los archivos Java:
+Copiar
+Editar
+javac *.java
+
+Ejecutar el programa:
+>>>>>>> 071ffc25204ae56f911794d0e986eec204a2c1b0
 Copiar
 Editar
 java Main
@@ -55,4 +75,8 @@ Error al compilar: Asegúrate de estar en el directorio correcto y que todos los
 
 Java no está instalado: Descarga e instala Java.
 
+<<<<<<< HEAD
 Problemas al ejecutar el juego: Verifica que la clase Main contiene el método main y que estás ejecutando el comando desde el directorio correcto.
+=======
+Problemas al ejecutar el juego: Verifica que la clase Main contiene el método main y que estás ejecutando el comando desde el directorio correcto.
+>>>>>>> 071ffc25204ae56f911794d0e986eec204a2c1b0
