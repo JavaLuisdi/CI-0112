@@ -68,20 +68,6 @@ Asegurate de tener Java 8 o superior instalado en tu sistema. Podés verificarlo
 
 ---
 
-## 📂 Clases del Proyecto
-
-- Main.java – Punto de entrada del programa.
-- GUI.java – Muestra el menú principal y controla el flujo general de los juegos.
-- Ahorcado.java – Contiene la lógica del juego de ahorcado.
-- JugadorAhorcado.java – Clase para llevar registro de nombre y fallos de cada jugador.
-- BatallaNaval.java – Controla el flujo del juego naval: colocar barcos, turnos, ataques.
-- Barco.java – Representa un barco con posición, largo y ancho.
-- Tablero.java – Representa la matriz 5x5 de cada jugador y métodos para mostrarla.
-- README.md – Este archivo de ayuda.
-- Archivo de decisiones.txt – Documento donde explicamos acuerdos, diseño y mejoras futuras.
-
----
-
 ## ✅ Requisitos
 
 - Java 8 o superior.
