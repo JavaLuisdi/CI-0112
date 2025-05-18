@@ -1,82 +1,112 @@
-🎮 Proyecto 1 - CI-0112
-Bienvenido al Proyecto 1 del curso CI-0112. Este proyecto incluye dos juegos clásicos desarrollados en Java:
+Proyecto 1 - CI-0112: Arcade de Batalla Naval y Ahorcado
 
-⚓ Batalla Naval
+Bienvenido al **Proyecto 1** del curso *CI-0112 - Programación I*. Este proyecto permite jugar dos juegos clásicos en consola, desarrollados completamente en Java:
 
-🔤 Ahorcado
+- ⚓ Batalla Naval
+- 🔤 Ahorcado
 
-📥 Instalación y Ejecución
-<<<<<<< HEAD
-Clonar el repositorio:
+Ambos juegos están diseñados para dos jugadores, alternando turnos, con validación de entradas y condiciones claras de victoria.
 
-Copiar
-Editar
-git clone https://github.com/JavaLuisdi/CI-0112.git
-Navegar al directorio del proyecto:
+---
 
+## 📥 Instalación y Ejecución
 
-Copiar
-Editar
-cd CI-0112/Proyecto1
-Compilar los archivos Java:
+1. Clonar el repositorio:
 
+   git clone https://github.com/JavaLuisdi/CI-0112.git
 
-Copiar
-Editar
-javac *.java
-Ejecutar el programa:
+2. Navegar al directorio del proyecto:
 
+   cd CI-0112/Proyecto1
 
-=======
+3. Compilar los archivos Java:
 
-Clonar el repositorio:
-Copiar
-Editar
-git clone https://github.com/JavaLuisdi/CI-0112.git
+   javac *.java
 
-Navegar al directorio del proyecto:
-Copiar
-Editar
-cd CI-0112/Proyecto1
+4. Ejecutar el programa:
 
-Compilar los archivos Java:
-Copiar
-Editar
-javac *.java
+   java Main
 
-Ejecutar el programa:
->>>>>>> 071ffc25204ae56f911794d0e986eec204a2c1b0
-Copiar
-Editar
-java Main
-Asegúrate de tener Java instalado en tu sistema. Puedes verificarlo con java -version.
+Asegurate de tener Java 8 o superior instalado en tu sistema. Podés verificarlo con:
 
-🕹️ Juegos Incluidos
-⚓ Batalla Naval
-Una versión simplificada del clásico juego de estrategia naval. Actualmente, el juego presenta las siguientes características:
+   java -version
 
-Tamaño del tablero: 5x5
+---
 
-Cantidad de barcos: 3
+## 🕹️ Ejecución del Programa
 
-Validación básica de posiciones
+1. Abrí el proyecto en tu IDE preferido (BlueJ, Visual Studio Code, etc.).
+2. Ejecutá la clase Main.java.
+3. Aparecerá un menú con tres opciones:
+   - 1. Ahorcado
+   - 2. Batalla Naval
+   - 3. Salir
+4. Ingresá el número del juego que querés jugar y seguí las instrucciones en consola.
 
-🔤 Ahorcado
-El tradicional juego de adivinar palabras letra por letra. Las características actuales incluyen:
+---
 
-Número fijo de intentos: 6
+## 🎯 Juegos Incluidos
 
-Sin categorías de palabras
+### 🔤 Ahorcado
 
-Sin registro de puntuaciones
+- Jugador 1 escribe una palabra secreta.
+- Jugador 2 intenta adivinarla, letra por letra.
+- Tiene 6 oportunidades de error antes de perder.
+- Luego se invierten los roles.
+- Se pueden jugar múltiples rondas y se muestra un resumen de fallos y quién ganó.
+- Al finalizar las rondas, se puede reiniciar el juego con nuevos jugadores.
 
-🧰 Solución de Problemas
-Error al compilar: Asegúrate de estar en el directorio correcto y que todos los archivos .java estén presentes.
+### ⚓ Batalla Naval
 
-Java no está instalado: Descarga e instala Java.
+- Cada jugador coloca 4 barcos de diferentes tamaños.
+- Los barcos se colocan en un tablero de 5x5, eligiendo dirección (horizontal o vertical).
+- Durante el juego:
+  - Si acertás el disparo (¡Tocado!), jugás de nuevo.
+  - Si fallás (¡Agua!), el turno pasa al otro jugador.
+- El juego termina cuando un jugador hunde todos los barcos del otro.
+- Se pueden jugar varias partidas seguidas.
 
-<<<<<<< HEAD
-Problemas al ejecutar el juego: Verifica que la clase Main contiene el método main y que estás ejecutando el comando desde el directorio correcto.
-=======
-Problemas al ejecutar el juego: Verifica que la clase Main contiene el método main y que estás ejecutando el comando desde el directorio correcto.
->>>>>>> 071ffc25204ae56f911794d0e986eec204a2c1b0
+---
+
+## 📂 Clases del Proyecto
+
+- Main.java – Punto de entrada del programa.
+- GUI.java – Muestra el menú principal y controla el flujo general de los juegos.
+- Ahorcado.java – Contiene la lógica del juego de ahorcado.
+- JugadorAhorcado.java – Clase para llevar registro de nombre y fallos de cada jugador.
+- BatallaNaval.java – Controla el flujo del juego naval: colocar barcos, turnos, ataques.
+- Barco.java – Representa un barco con posición, largo y ancho.
+- Tablero.java – Representa la matriz 5x5 de cada jugador y métodos para mostrarla.
+- README.md – Este archivo de ayuda.
+- Archivo de decisiones.txt – Documento donde explicamos acuerdos, diseño y mejoras futuras.
+
+---
+
+## ✅ Requisitos
+
+- Java 8 o superior.
+- Entrada y salida en consola (Scanner y System.out.print).
+- Código modular, limpio y separado.
+
+---
+
+## 🧰 Solución de Problemas
+
+- Error al compilar: Asegúrate de estar en el directorio correcto y que todos los archivos .java estén presentes.
+- Java no está instalado: Descargá e instalá Java.
+- Problemas al ejecutar el juego: Verificá que la clase Main contiene el método main() y que estás ejecutando desde el directorio correcto.
+
+---
+
+## 👥 Créditos
+
+Desarrollado por:
+
+- David Araya Montero – C4C553
+- [Nombre 2] – [Carné]
+
+Para el curso de *Programación I*, grupo C0112, ciclo 2025-1.
+
+---
+
+¡Gracias por jugar! 🎉
