@@ -102,10 +102,10 @@ Asegurate de tener Java 8 o superior instalado en tu sistema. Podés verificarlo
 
 Desarrollado por:
 
-- David Araya Montero – C4C553
-- [Nombre 2] – [Carné]
+- Luis Diego Elizondo Fennell – C4E844
+- Christopher Chacon Mora – C32037
 
-Para el curso de *Programación I*, grupo C0112, ciclo 2025-1.
+Para el curso de *Programación I*, ciclo 2025-1.
 
 ---
 
