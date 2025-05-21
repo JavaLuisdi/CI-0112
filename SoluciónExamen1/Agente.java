@@ -3,6 +3,7 @@ public class Agente {
     private int cantidadDeMensajes;
     private int id;
     private static Cola cola = new Cola();
+    private int[] ultimaCasillaReportada;
 
     private int coordX;
     private int coordY;
@@ -12,9 +13,10 @@ public class Agente {
     private int[] casillaConMayorComidaReportada;
 
     public Agente(int id , int coordX , int coordY) {
-        this.mensajes = new Mensaje[100];
+        this.mensajes = new Mensaje[50];
         this.cantidadDeMensajes = 0;
         this.id = id;
+        this.ultimaCasillaReportada = new int[3];
 
         this.coordX = coordX;
         this.coordY = coordY;
@@ -45,10 +47,29 @@ public class Agente {
         this.cantidadDeMensajes++;
     }
 
+    public boolean debeEnviarMensaje(int[] nuevaCasilla) {
+        for (int i = 0; i < 3; i++) {
+            if (nuevaCasilla[i] != ultimaCasillaReportada[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void actualizarUltimaCasillaReportada(int[] nuevaCasilla) {
+        for (int i = 0; i < 3; i++) {
+            ultimaCasillaReportada[i] = nuevaCasilla[i];
+        }
+    }
+
     public void enviarMensaje(int idDestinatario) {
-        Mensaje mensaje = this.mensajes[this.cantidadDeMensajes - 1];
-        mensaje.setDestinatario(idDestinatario);
-        Agente.cola.añadirMensaje(mensaje);
+        Mensaje mensajeOriginal = this.mensajes[this.cantidadDeMensajes - 1];
+        Mensaje mensajeCopia = new Mensaje(
+            mensajeOriginal.getIdFuente(),
+            mensajeOriginal.getIdEmisor(),
+            idDestinatario,
+            mensajeOriginal.getContenido());
+        Agente.cola.añadirMensaje(mensajeCopia);
     }
 
     public Mensaje getMensaje() {
@@ -73,6 +94,30 @@ public class Agente {
         return this.casillaConMayorComidaReportada;
     }
 
+
+    public int[] direccionParaMoverse() {
+        final int IZQUIERDA = 0;
+        final int DERECHA = 1;
+        final int ABAJO = 0;
+        final int ARRIBA = 1;
+        int horizontal;
+        int vertical;
+        if (this.getCasillaConMayorComidaReportada()[0] > this.getCoordX()) {
+            horizontal = DERECHA;
+        } else if (this.getCasillaConMayorComidaReportada()[0] < this.getCoordX()) {
+            horizontal = IZQUIERDA;
+        } else {
+            horizontal = -1;
+        }
+        if (this.getCasillaConMayorComidaReportada()[1] > this.getCoordY()) {
+            vertical = ARRIBA;
+        } else if (this.getCasillaConMayorComidaReportada()[1] < this.getCoordY()) {
+            vertical = ABAJO;
+        } else {
+            vertical = -1;
+        }
+        return new int[] {horizontal , vertical};
+    }
 
     public void moverse(int horizontal , int vertical) {
         this.coordXPrevia = this.coordX;
@@ -110,5 +155,15 @@ public class Agente {
             }
         }
         return new int[] {coordXMax , coordYMax , comidaMax};
+    }
+
+    public Plato getPlato() {
+        return plato;
+    }
+
+    public void mostrarEstadoActual() {
+        System.out.println("Insecto " + this.id + ":");
+        System.out.println("Posición actual: (" + this.getCoordX() + " , " + this.getCoordY() + ")");
+        System.out.println("Casilla de vecindad con mayor comida (" + this.buscarComida()[2] + "): (" + this.buscarComida()[0] + " , " + this.buscarComida()[1] + ")");
     }
 }

@@ -32,6 +32,22 @@ public class Plato {
         }
     }
 
+    public int[] encontrarComidaMaxima() {
+        int X = -1;
+        int Y = -1;
+        int max = 0;
+        for (int i = 0 ; i < this.comida.length ; i++) {
+            for (int j = 0 ; j < this.comida[i].length ; j++) {
+                if (this.comida[i][j] > max) {
+                    X = j;
+                    Y = i;
+                    max = this.comida[i][j];
+                }
+            }
+        }
+        return new int[] {X , Y , max};
+    } 
+
     public int[][] getComida() {
         return comida;
     }

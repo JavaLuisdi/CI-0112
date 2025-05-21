@@ -17,21 +17,14 @@ public class Simulación {
     }
     public static void main(String[] args) {
         insectos = new Agente[5];
-        final int IZQUIERDA = 0;
-        final int DERECHA = 1;
-        final int ABAJO = 0;
-        final int ARRIBA = 1;
-        int horizontal;
-        int vertical;
-
-        for (int i = 0 ; i < insectos.length ; i++) {
-            insectos[i] = new Agente(i+1, 166 * (i + 1), 166 * (i + 1));
-        }
+        insectos[0] = new Agente(1, 100, 100);
+        insectos[1] = new Agente(2, 900, 100);
+        insectos[2] = new Agente(3, 100, 900);
+        insectos[3] = new Agente(4, 900, 900);
+        insectos[4] = new Agente(5, 500, 500);
         do {
             for (int i = 0 ; i < insectos.length ; i++) {
-                System.out.println("Insecto " + (i+1) + ":");
-                System.out.println("Posición actual: (" + insectos[i].getCoordX() + " , " + insectos[i].getCoordY() + ")");
-                System.out.println("Casilla de vecindad con mayor comida (" + insectos[i].buscarComida()[2] + "): (" + insectos[i].buscarComida()[0] + " , " + insectos[i].buscarComida()[1] + ")");
+                insectos[i].mostrarEstadoActual();
                 while (insectos[i].recibirMensaje()) {
                     if (insectos[i].getMensaje().getContenido()[2] > insectos[i].buscarComida()[2] && insectos[i].getMensaje().getContenido()[2] > insectos[i].getCasillaConMayorComidaReportada()[2]) {
                         insectos[i].setCasillaConMayorComidaReportada(insectos[i].getMensaje().getContenido());
@@ -39,24 +32,11 @@ public class Simulación {
                 }
                 if (insectos[i].getCasillaConMayorComidaReportada()[2] > insectos[i].buscarComida()[2]) {
                     System.out.println("Se mueve hacia casilla (" + insectos[i].getCasillaConMayorComidaReportada()[0] + " , " + insectos[i].getCasillaConMayorComidaReportada()[1] + ").");
-                    if (insectos[i].getCasillaConMayorComidaReportada()[0] > insectos[i].getCoordX()) {
-                        horizontal = DERECHA;
-                    } else if (insectos[i].getCasillaConMayorComidaReportada()[0] < insectos[i].getCoordX()) {
-                        horizontal = IZQUIERDA;
-                    } else {
-                        horizontal = -1;
-                    }
-                    if (insectos[i].getCasillaConMayorComidaReportada()[1] > insectos[i].getCoordY()) {
-                        vertical = ARRIBA;
-                    } else if (insectos[i].getCasillaConMayorComidaReportada()[1] < insectos[i].getCoordY()) {
-                        vertical = ABAJO;
-                    } else {
-                        vertical = -1;
-                    }
-                    insectos[i].moverse(horizontal, vertical);
+                    insectos[i].moverse(insectos[i].direccionParaMoverse()[0], insectos[i].direccionParaMoverse()[1]);
                 } else {
-                    if (insectos[i].getCasillaConMayorComidaReportada()[2] < insectos[i].buscarComida()[2]) {
+                    if (insectos[i].getCasillaConMayorComidaReportada()[2] < insectos[i].buscarComida()[2] && insectos[i].debeEnviarMensaje(insectos[i].buscarComida())) {
                         insectos[i].crearMensaje(insectos[i].buscarComida());
+                        insectos[i].actualizarUltimaCasillaReportada(insectos[i].buscarComida());
                         System.out.println("Envía mensaje con información de esta casilla a los demás insectos.");
                         for (int j = 0 ; j < insectos.length ; j++) {
                             if (i != j) {
@@ -66,10 +46,13 @@ public class Simulación {
                     } else {
                         System.out.println("No realiza ninguna acción.");
                     }
+                    insectos[i].moverse(-1, -1);
                 }
                 insectos[0].getCola().mostrarMensajes();  
                 System.out.println();
             }
         } while (!ningúnInsectoMovido() || !ningúnMensajeEnCola());
+        System.out.println("Casilla encontrada por insectos (" + insectos[0].buscarComida()[2] + "): (" + insectos[0].buscarComida()[0] + " , " + insectos[0].buscarComida()[1] + ").");
+        System.out.println("Casilla con mayor comida (" + insectos[0].getPlato().encontrarComidaMaxima()[2] + "): (" + insectos[0].getPlato().encontrarComidaMaxima()[0] + " , " + insectos[0].getPlato().encontrarComidaMaxima()[1] + ").");
     }
 }
