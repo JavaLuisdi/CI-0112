@@ -36,6 +36,15 @@ public class Cola {
     }
 
     /**
+     * Devuelve el primer nodo de la cola.
+     *
+     * @return el primer nodo de la cola (primerNodo).
+     */
+    public Nodo getPrimerNodo() {
+        return this.primerNodo;
+    }
+
+    /**
      * @brief Obtiene el último nodo de la cola de forma recursiva
      * 
      * Recorre la lista enlazada hasta encontrar el nodo que no tiene
@@ -67,12 +76,20 @@ public class Cola {
         }
     }
 
- public Nodo getPrimerNodo() {
-        return this.primerNodo;
+    /**
+     * Devuelve una representación en cadena de la cola de nodos, comenzando desde el nodo dado.
+     * Cada elemento de la cola se muestra en una nueva línea con su posición y el nombre de la mascota.
+     *
+     * @param nodo      El nodo inicial desde donde se comienza a mostrar la cola.
+     * @param posicion  La posición actual del nodo en la cola (usualmente se inicia en 1).
+     * @return          Una cadena que representa la cola de nodos a partir del nodo dado.
+     */
+    public String mostrarCola(Nodo nodo , int posicion) {
+        if (nodo == null) {
+            return "";
+        }
+        String cola = "";
+        cola += posicion + ". " + nodo.getMascota().getNombre() + "\n" + mostrarCola(nodo.getSiguienteNodo() , ++posicion);
+        return cola;
     }
 }
-
-
-
-    
-

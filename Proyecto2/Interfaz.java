@@ -8,7 +8,7 @@ public class Interfaz extends JFrame {
     private Nodo ultimaMascotaAtendida;
     
     public Interfaz() {
-        setTitle("Veterinaria Los ");
+        setTitle("Veterinaria Los Trolls");
         setSize(700, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -168,23 +168,29 @@ public class Interfaz extends JFrame {
     }
 
     private void eliminarMascota(JTextArea areaTexto, JLabel labelEstado) {
-        String nombre = JOptionPane.showInputDialog(this, "Nombre de la mascota a eliminar:");
-        if (nombre == null || nombre.trim().isEmpty()) {
-            actualizarEstado(labelEstado, "Operación cancelada");
-            return;
-        }
-
-        Nodo nodoEliminar = arbol.buscarPorNombre(nombre, arbol.getRaiz());
-        if (nodoEliminar == null) {
-            areaTexto.setText("No se encontró mascota con nombre: " + nombre);
-            actualizarEstado(labelEstado, "Mascota no encontrada");
-            return;
-        }
-
-        arbol.eliminarNodo(nodoEliminar);
-        areaTexto.setText("Mascota eliminada del árbol: " + nombre);
-        actualizarEstado(labelEstado, "Mascota eliminada: " + nombre);
+    String nombre = JOptionPane.showInputDialog(this, "Nombre de la mascota a eliminar:");
+    if (nombre == null || nombre.trim().isEmpty()) {
+        actualizarEstado(labelEstado, "Operación cancelada");
+        return;
     }
+
+    // Buscar el nodo en el árbol
+    Nodo nodoEliminar = arbol.buscarPorNombre(nombre, arbol.getRaiz());
+    if (nodoEliminar == null) {
+        areaTexto.setText("No se encontró mascota con nombre: " + nombre);
+        actualizarEstado(labelEstado, "Mascota no encontrada");
+        return;
+    }
+
+    // Eliminar el nodo del árbol
+    arbol.eliminarNodo(nodoEliminar);
+
+    // Eliminar el nodo de la cola
+    cola.eliminarNodo(nodoEliminar);
+
+    areaTexto.setText("Mascota eliminada: " + nombre);
+    actualizarEstado(labelEstado, "Mascota eliminada: " + nombre);
+}
 
     // Métodos auxiliares para recorridos del árbol
     private void preorden(Nodo nodo, StringBuilder sb) {
