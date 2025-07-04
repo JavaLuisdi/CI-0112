@@ -160,4 +160,13 @@ public class ArbolBinario {
             }
         }
     }
+
+
+
+public Nodo getRaiz() {
+        return this.raiz;
+    }
+
+
+    
 }

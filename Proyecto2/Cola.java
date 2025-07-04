@@ -66,4 +66,13 @@ public class Cola {
             setPrimerNodo(nuevoPrimerNodo);            
         }
     }
+
+ public Nodo getPrimerNodo() {
+        return this.primerNodo;
+    }
 }
+
+
+
+    
+
