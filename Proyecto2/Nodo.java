@@ -76,8 +76,8 @@ public class Nodo {
      */
     public Nodo getNodoLado(boolean lado) {
         if (lado) {
-            return this.izquierdo;
+            return this.derecho;
         }
-        return this.derecho;
+        return this.izquierdo;
     }
 }

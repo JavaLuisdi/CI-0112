@@ -6,6 +6,15 @@ public class ArbolBinario {
     }
 
     /**
+     * Devuelve la raíz del árbol binario.
+     *
+     * @return el nodo raíz del árbol binario, o {@code null} si el árbol está vacío.
+     */
+    public Nodo getRaiz() {
+        return this.raiz;
+    }
+
+    /**
      * Inserta un nuevo nodo en el árbol binario.
      * Si el árbol está vacío, el nodo se convierte en la raíz.
      * Si no, busca la posición adecuada en el árbol y coloca el nodo
@@ -17,7 +26,7 @@ public class ArbolBinario {
         if (this.raiz == null) {
             this.raiz = nodo;
         } else {
-        posicionAdecuada(nodo , raiz).setNodoLado(nodo, compararNombres(nodo , posicionAdecuada(nodo , raiz) , 0));
+        posicionAdecuada(nodo , this.raiz).setNodoLado(nodo, compararNombres(nodo , posicionAdecuada(nodo , this.raiz) , 0));
         }
     }
 
@@ -30,11 +39,11 @@ public class ArbolBinario {
      * @return El nodo de comparación si la posición adecuada está vacía, o el nodo hijo correspondiente
      *         donde se debe continuar la búsqueda.
      */
-    public Nodo posicionAdecuada(Nodo nodoPorOrdenar , Nodo nodoComparacion) {
+    private Nodo posicionAdecuada(Nodo nodoPorOrdenar , Nodo nodoComparacion) {
         if (nodoComparacion.getNodoLado(compararNombres(nodoPorOrdenar , nodoComparacion , 0)) == null) {
             return nodoComparacion;
         }
-        return nodoComparacion.getNodoLado(compararNombres(nodoPorOrdenar , nodoComparacion , 0));
+        return posicionAdecuada(nodoPorOrdenar , nodoComparacion.getNodoLado(compararNombres(nodoPorOrdenar , nodoComparacion , 0)));
     }
 
     /**
@@ -46,15 +55,17 @@ public class ArbolBinario {
      * @return                   {@code true} si el nombre de la mascota en nodoPorOrdenar es mayor o igual al de nodoComparacion
      *                           según el orden lexicográfico, o si ambos nombres son iguales; {@code false} si es menor.
      */
-    public boolean compararNombres(Nodo nodoPorOrdenar , Nodo nodoComparacion , int n) {
-        if (nodoPorOrdenar.getMascota().getNombre().equals(nodoComparacion.getMascota().getNombre())) {
+    private boolean compararNombres(Nodo nodoPorOrdenar , Nodo nodoComparacion , int n) {
+        int indiceLetraNodoPorOrdenar = (int) nodoPorOrdenar.getMascota().getNombre().charAt(n);
+        int indiceLetraNodoComparacion = (int) nodoComparacion.getMascota().getNombre().charAt(n);
+        if (indiceLetraNodoPorOrdenar < indiceLetraNodoComparacion) {
+            return false;
+        } else if (indiceLetraNodoPorOrdenar > indiceLetraNodoComparacion) {
             return true;
         }
-        int indicePrimerLetraNodoPorOrdenar = nodoPorOrdenar.getMascota().getNombre().charAt(n);
-        int indicePrimerLetraNodoComparacion = nodoComparacion.getMascota().getNombre().charAt(n);
-        if (indicePrimerLetraNodoPorOrdenar < indicePrimerLetraNodoComparacion) {
+        if (n == nodoPorOrdenar.getMascota().getNombre().length() - 1) {
             return false;
-        } else if (indicePrimerLetraNodoPorOrdenar > indicePrimerLetraNodoComparacion) {
+        } else if (n == nodoComparacion.getMascota().getNombre().length() - 1) {
             return true;
         }
         return compararNombres(nodoPorOrdenar , nodoComparacion , n + 1);
@@ -88,7 +99,7 @@ public class ArbolBinario {
      * @param nodoComparacion El nodo actual desde donde se inicia la búsqueda (normalmente la raíz).
      * @return El nodo padre de nodoHijo si se encuentra; de lo contrario, retorna null.
      */
-    public Nodo buscarNodoPadre(Nodo nodoHijo , Nodo nodoComparacion) {
+    private Nodo buscarNodoPadre(Nodo nodoHijo , Nodo nodoComparacion) {
         if (nodoComparacion == null) {
             return null;
         }
@@ -160,13 +171,4 @@ public class ArbolBinario {
             }
         }
     }
-
-
-
-public Nodo getRaiz() {
-        return this.raiz;
-    }
-
-
-    
 }
