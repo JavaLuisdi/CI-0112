@@ -85,12 +85,11 @@ public class ArbolBinario {
         if (nodoComparacion.getMascota().getNombre().equals(nombre)) {
             return nodoComparacion;
         }
-        // Comparar los nombres para decidir en qué dirección continuar la búsqueda
-        Nodo nodoConNombre = new Nodo(new Mascota(nombre));
-        if (compararNombres(nodoConNombre , nodoComparacion , 0)) {
-            return buscarPorNombre(nombre , nodoComparacion.getNodoLado(true));
+        Nodo nodoIzquierdo = buscarPorNombre(nombre , nodoComparacion.getNodoLado(false));
+        if (nodoIzquierdo != null) {
+            return nodoIzquierdo;
         }
-        return buscarPorNombre(nombre , nodoComparacion.getNodoLado(false));
+        return buscarPorNombre(nombre , nodoComparacion.getNodoLado(true));
     }
 
     /**
