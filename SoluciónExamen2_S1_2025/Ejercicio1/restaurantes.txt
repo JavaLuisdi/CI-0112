@@ -1,0 +1,9 @@
+Restaurante A / Hamburguesa / 2500
+Restaurante A / Papas Fritas / 1200
+Restaurante A / Refresco / 800
+Restaurante B / Pizza / 3200
+Restaurante B / Ensalada / 1500
+Restaurante B / Agua / 600
+Restaurante C / Sushi / 4000
+Restaurante C / Té Verde / 900
+Restaurante C / Helado / 1100
